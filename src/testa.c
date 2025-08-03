@@ -1,7 +1,7 @@
 #include "testa.h"
 
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 static TestCase *tests_head = NULL;
 bool __test_passed;
@@ -13,20 +13,24 @@ int total_assertions = 0;
 int passed_assertions = 0;
 int failed_assertions = 0;
 
-void register_test(const char *test_name, TestFn fn) {
+void register_test(const char *test_name, TestFn fn)
+{
     TestCase *test_case = malloc(sizeof(TestCase));
     test_case->name = test_name;
     test_case->fn = fn;
     test_case->next = NULL;
 
     // if tests_head is null
-    if (!tests_head) {
+    if (!tests_head)
+    {
         tests_head = test_case;
-    } 
-    else {
+    }
+    else
+    {
         TestCase *previous = NULL;
         TestCase *current = tests_head;
-        while (current) {
+        while (current)
+        {
             previous = current;
             current = current->next;
         }
@@ -36,11 +40,13 @@ void register_test(const char *test_name, TestFn fn) {
     total_tests++;
 }
 
-void run_all_tests() {
+void run_all_tests()
+{
     printf("Running  %d tests.\n", total_tests);
     printf("========================================\n");
-    TestCase *current = tests_head;    
-    while(current) {
+    TestCase *current = tests_head;
+    while (current)
+    {
         RUN_TEST(current->name, current->fn);
         current = current->next;
     }

@@ -1,34 +1,9 @@
-BasedOnStyle: LLVM
-
-IndentWidth: 4
-TabWidth: 4
-UseTab: Never
-
-ColumnLimit: 80
-
-AlignAfterOpenBracket: Align
-AlignConsecutiveAssignments: true
-AlignEscapedNewlines: Right
-AlignOperands: true
-
-AllowShortFunctionsOnASingleLine: InlineOnly
+BasedOnStyle:    LLVM
+BreakBeforeBraces: Allman
+IndentWidth:     4
+TabWidth:        4
+UseTab:          Never
+ColumnLimit:     80
 AllowShortIfStatementsOnASingleLine: false
 AllowShortLoopsOnASingleLine: false
-
-BreakBeforeBraces: Allman
-BraceWrapping:
-  AfterFunction: true
-  AfterStruct: true
-  AfterEnum: true
-  AfterUnion: true
-  BeforeElse: true
-  IndentBraces: false
-
-SpaceBeforeParens: ControlStatements
-SpacesInParentheses: false
-SpacesInSquareBrackets: false
-SpaceInEmptyParentheses: false
-SpacesInCStyleCastParentheses: false
-
-SortIncludes: true
-IncludeBlocks: Regroup
+AllowShortFunctionsOnASingleLine: Inline

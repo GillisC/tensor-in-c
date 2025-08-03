@@ -1,6 +1,7 @@
 #ifndef TESTA_H
 #define TESTA_H
 
+#include <math.h>
 #include <stdbool.h>
 
 #ifdef TESTA_USE_COLOR
