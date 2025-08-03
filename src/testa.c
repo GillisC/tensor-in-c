@@ -45,10 +45,13 @@ void run_all_tests()
     printf("Running  %d tests.\n", total_tests);
     printf("========================================\n");
     TestCase *current = tests_head;
+    TestCase *previous;
     while (current)
     {
         RUN_TEST(current->name, current->fn);
+        previous = current;
         current = current->next;
+        free(previous);
     }
     printf("============= Test Summary =============\n");
     printf("Total tests:      %d\n", total_tests);

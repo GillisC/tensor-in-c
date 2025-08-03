@@ -115,9 +115,14 @@ void reshape(Tensor *tensor, const size_t *shape, size_t ndim)
 
     size_t *new_strides = compute_strides(shape, ndim);
 
-    tensor->ndim = ndim;
+    free(tensor->shape);
+    free(tensor->strides);
+
+    tensor->shape = malloc(sizeof(size_t) * ndim);
+    tensor->strides = new_strides;
+
     memcpy(tensor->shape, shape, sizeof(size_t) * ndim);
-    memcpy(tensor->strides, new_strides, sizeof(size_t) * ndim);
+    tensor->ndim = ndim;
 }
 
 Tensor *slice(const Tensor *original, const size_t *start, const size_t *end)
@@ -126,16 +131,18 @@ Tensor *slice(const Tensor *original, const size_t *start, const size_t *end)
 
     // new slice shape
     tensor->shape = malloc(sizeof(size_t) * original->ndim);
+    tensor->strides = malloc(sizeof(size_t) * original->ndim);
     size_t slice_size = 1;
     for (size_t i = 0; i < original->ndim; i++)
     {
         tensor->shape[i] = end[i] - start[i];
+        tensor->strides[i] = original->strides[i];
         slice_size *= tensor->shape[i];
     }
 
     tensor->size = slice_size;
     tensor->ndim = original->ndim;
-    tensor->strides = tensor->strides;
+
     tensor->data =
         (void *)((char *)original->data + compute_flat_index(original, start) *
                                               sizeof_dtype(original->dtype));
